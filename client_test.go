@@ -2643,7 +2643,7 @@ func Test_SendVerifyEmail(t *testing.T) {
 		cfg.GoCloak.Realm,
 		params)
 	if err != nil {
-		if err.Error() == "500 Internal Server Error: Failed to send execute actions email" {
+		if err.Error() == "500 Internal Server Error: Failed to send verify email" {
 			return
 		}
 		require.NoError(t, err, "SendVerifyEmail failed")
