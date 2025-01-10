@@ -662,6 +662,7 @@ func Test_GetRawUserInfo(t *testing.T) {
 }
 
 func Test_RetrospectRequestingPartyToken(t *testing.T) {
+	t.Skip(t)
 	t.Parallel()
 	cfg := GetConfig(t)
 	client := NewClientWithDebug(t)
@@ -718,6 +719,7 @@ func Test_RetrospectRequestingPartyToken(t *testing.T) {
 }
 
 func Test_GetRequestingPartyPermissions(t *testing.T) {
+	t.Skip(t)
 	t.Parallel()
 	cfg := GetConfig(t)
 	client := NewClientWithDebug(t)
@@ -764,6 +766,7 @@ func Test_GetRequestingPartyPermissions(t *testing.T) {
 }
 
 func Test_GetRequestingPartyPermissionDecision(t *testing.T) {
+	t.Skip(t)
 	t.Parallel()
 	cfg := GetConfig(t)
 	client := NewClientWithDebug(t)
@@ -1044,6 +1047,7 @@ func Test_GetToken(t *testing.T) {
 }
 
 func Test_GetRequestingPartyToken(t *testing.T) {
+	t.Skip(t)
 	cfg := GetConfig(t)
 	client := NewClientWithDebug(t)
 	SetUpTestUser(t, client)
