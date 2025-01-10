@@ -3661,7 +3661,7 @@ func (g *GoCloak) UpdatePolicy(ctx context.Context, token, realm, idOfClient str
 	}
 	shouldAddType := compResult != 1
 
-	path := []string{"clients", idOfClient, "authz", "resource-server", "policy"}
+	path := []string{"clients", idOfClient, "authz", "resource-server", "policy", "client"}
 
 	if shouldAddType {
 		path = append(path, *policy.Type)
