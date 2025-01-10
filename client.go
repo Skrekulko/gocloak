@@ -79,7 +79,7 @@ func (g *GoCloak) compareVersions(v, token string, ctx context.Context) (int, er
 		v = "v" + v
 	}
 
-	return semver.Compare(curVersion, v), nil
+	return semver.Compare(v, curVersion), nil
 }
 
 // Get the server version from the serverinfo endpoint.
@@ -3628,7 +3628,7 @@ func (g *GoCloak) CreatePolicy(ctx context.Context, token, realm, idOfClient str
 	}
 	shouldAddType := compResult != 1
 
-	path := []string{"clients", idOfClient, "authz", "resource-server", "policy", "client"}
+	path := []string{"clients", idOfClient, "authz", "resource-server", "policy"}
 
 	if shouldAddType {
 		path = append(path, *policy.Type)
