@@ -2617,7 +2617,7 @@ func Test_ExecuteActionsEmail_UpdatePassword(t *testing.T) {
 		cfg.GoCloak.Realm,
 		params)
 	if err != nil {
-		if err.Error() == "500 Internal Server Error: Failed to send execute actions email" {
+		if strings.Contains(err.Error(), "500 Internal Server Error: Failed to send execute actions email") {
 			return
 		}
 		require.NoError(t, err, "ExecuteActionsEmail failed")
