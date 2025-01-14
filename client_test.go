@@ -1851,7 +1851,7 @@ func Test_ClientScopeMappingsClientRoles(t *testing.T) {
 	require.NoError(t, err, "GetClientScopeMappingsClientRoles failed")
 	require.Len(
 		t, clientRoles, len(roles),
-		"GetClientScopeMappingsClientRoles should return exact %s roles", len(roles),
+		"GetClientScopeMappingsClientRoles should return exact %d roles", len(roles),
 	)
 
 	clientRoles, err = client.GetClientRoles(
@@ -1928,7 +1928,7 @@ func Test_ClientScopeMappingsRealmRoles(t *testing.T) {
 	require.NoError(t, err, "GetClientScopeMappingsRealmRoles failed")
 	require.Len(
 		t, realmRoles, len(roles),
-		"GetClientScopeMappingsRealmRoles should return exact %s realm", len(roles),
+		"GetClientScopeMappingsRealmRoles should return exact %d realm", len(roles),
 	)
 
 	realmRoles, err = client.GetRealmRoles(
@@ -1948,7 +1948,7 @@ func Test_ClientScopeMappingsRealmRoles(t *testing.T) {
 	require.NoError(t, err, "GetClientScopeMappingsRealmRolesAvailable failed")
 	require.Len(
 		t, realmRolesAvailable, len(realmRoles)-len(roles),
-		"GetClientScopeMappingsRealmRolesAvailable should return exact %s realm", len(realmRoles)-len(roles),
+		"GetClientScopeMappingsRealmRolesAvailable should return exact %d realm", len(realmRoles)-len(roles),
 	)
 }
 
@@ -2034,7 +2034,7 @@ func Test_ClientScopesMappingsClientRoles(t *testing.T) {
 	require.NoError(t, err, "GetClientScopesScopeMappingsClientRoles failed")
 	require.Len(
 		t, mappedRoles, len(onlyFirstRole),
-		"GetClientScopeMappingsClientRoles should return exact %s roles", len(onlyFirstRole),
+		"GetClientScopeMappingsClientRoles should return exact %d roles", len(onlyFirstRole),
 	)
 
 	clientRolesAvailable, err := client.GetClientScopesScopeMappingsClientRolesAvailable(
