@@ -7105,7 +7105,6 @@ func Test_UpdateComponent(t *testing.T) {
 }
 
 func Test_RevokeToken(t *testing.T) {
-	t.Skip()
 	t.Parallel()
 	cfg := GetConfig(t)
 	client := NewClientWithDebug(t)
