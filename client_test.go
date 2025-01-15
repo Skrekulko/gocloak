@@ -7119,3 +7119,63 @@ func Test_RevokeToken(t *testing.T) {
 	)
 	require.NoError(t, err, "Revoke failed")
 }
+
+func Test_GetClientExampleAccessToken(t *testing.T) {
+	t.Parallel()
+	cfg := GetConfig(t)
+	client := NewClientWithDebug(t)
+	SetUpTestUser(t, client)
+	token := GetAdminToken(t, client)
+
+	_, err := client.GetClientExampleAccessToken(
+		context.Background(),
+		token.AccessToken,
+		cfg.GoCloak.Realm,
+		gocloakClientID,
+		gocloak.GetClientExampleParams{
+			Scope:  gocloak.StringP("openid"),
+			UserID: gocloak.StringP(testUserID),
+		},
+	)
+	require.NoError(t, err, "GetClientExampleAccessToken failed")
+}
+
+func Test_GetClientExampleIDToken(t *testing.T) {
+	t.Parallel()
+	cfg := GetConfig(t)
+	client := NewClientWithDebug(t)
+	SetUpTestUser(t, client)
+	token := GetAdminToken(t, client)
+
+	_, err := client.GetClientExampleIDToken(
+		context.Background(),
+		token.AccessToken,
+		cfg.GoCloak.Realm,
+		gocloakClientID,
+		gocloak.GetClientExampleParams{
+			Scope:  gocloak.StringP("openid"),
+			UserID: gocloak.StringP(testUserID),
+		},
+	)
+	require.NoError(t, err, "GetClientExampleIDToken failed")
+}
+
+func Test_GetClientExampleUserInfo(t *testing.T) {
+	t.Parallel()
+	cfg := GetConfig(t)
+	client := NewClientWithDebug(t)
+	SetUpTestUser(t, client)
+	token := GetAdminToken(t, client)
+
+	_, err := client.GetClientExampleUserInfo(
+		context.Background(),
+		token.AccessToken,
+		cfg.GoCloak.Realm,
+		gocloakClientID,
+		gocloak.GetClientExampleParams{
+			Scope:  gocloak.StringP("openid"),
+			UserID: gocloak.StringP(testUserID),
+		},
+	)
+	require.NoError(t, err, "GetClientExampleUserInfo failed")
+}

@@ -1445,6 +1445,141 @@ type GetClientUserSessionsParams struct {
 	Max   *int `json:"max,string,omitempty"`
 }
 
+// GetClientExampleParams represents the optional parameters for getting generated example of a client for specified user
+type GetClientExampleParams struct {
+	Scope  *string `json:"scope,omitempty"`
+	UserID *string `json:"userId,omitempty"`
+}
+
+// AccessToken is a representation of access token
+// v26: https://www.keycloak.org/docs-api/26.0.8/rest-api/index.html#AccessToken
+type AccessToken struct {
+	Jti                 *string             `json:"jti,omitempty"`
+	Exp                 *int64              `json:"exp,omitempty"`
+	Nbf                 *int64              `json:"nbf,omitempty"`
+	Iat                 *int64              `json:"iat,omitempty"`
+	Iss                 *string             `json:"iss,omitempty"`
+	Sub                 *string             `json:"sub,omitempty"`
+	Typ                 *string             `json:"typ,omitempty"`
+	Azp                 *string             `json:"azp,omitempty"`
+	Nonce               *string             `json:"nonce,omitempty"`
+	AuthTime            *int64              `json:"auth_time,omitempty"`
+	Sid                 *string             `json:"sid,omitempty"`
+	AtHash              *string             `json:"at_hash,omitempty"`
+	CHash               *string             `json:"c_hash,omitempty"`
+	Name                *string             `json:"name,omitempty"`
+	GivenName           *string             `json:"given_name,omitempty"`
+	FamilyName          *string             `json:"family_name,omitempty"`
+	MiddleName          *string             `json:"middle_name,omitempty"`
+	Nickname            *string             `json:"nickname,omitempty"`
+	PreferredUsername   *string             `json:"preferred_username,omitempty"`
+	Profile             *string             `json:"profile,omitempty"`
+	Picture             *string             `json:"picture,omitempty"`
+	Website             *string             `json:"website,omitempty"`
+	Email               *string             `json:"email,omitempty"`
+	EmailVerified       *bool               `json:"email_verified,omitempty"`
+	Gender              *string             `json:"gender,omitempty"`
+	Birthdate           *string             `json:"birthdate,omitempty"`
+	Zoneinfo            *string             `json:"zoneinfo,omitempty"`
+	Locale              *string             `json:"locale,omitempty"`
+	PhoneNumber         *string             `json:"phone_number,omitempty"`
+	PhoneNumberVerified *bool               `json:"phone_number_verified,omitempty"`
+	Address             *AddressClaimSet    `json:"address,omitempty"`
+	UpdatedAt           *int64              `json:"updated_at,omitempty"`
+	ClaimsLocales       *string             `json:"claims_locales,omitempty"`
+	Acr                 *string             `json:"acr,omitempty"`
+	SHash               *string             `json:"s_hash,omitempty"`
+	TrustedCerts        *[]string           `json:"trusted-certs,omitempty"`
+	AllowedOrigins      *[]string           `json:"allowed-origins,omitempty"`
+	RealmAccess         *Access2            `json:"realm_access,omitempty"`
+	ResourceAccess      *map[string]Access2 `json:"resource_access,omitempty"`
+	Authorization       *Authorization      `json:"authorization,omitempty"`
+	Cnf                 *Confirmation       `json:"cnf,omitempty"`
+	Scope               *string             `json:"scope,omitempty"`
+	OtherClaims         *map[string]interface{}
+}
+
+// AddressClaimSet is a representation of address claim set
+// v26: https://www.keycloak.org/docs-api/26.0.8/rest-api/index.html#AddressClaimSet
+type AddressClaimSet struct {
+	Formatted     *string `json:"formatted,omitempty"`
+	StreetAddress *string `json:"street_address,omitempty"`
+	Locality      *string `json:"locality,omitempty"`
+	Region        *string `json:"region,omitempty"`
+	PostalCode    *string `json:"postal_code,omitempty"`
+	Country       *string `json:"country,omitempty"`
+}
+
+// Access is a representation of access
+// v26: https://www.keycloak.org/docs-api/26.0.8/rest-api/index.html#Access
+type Access2 struct {
+	Roles        *[]string `json:"roles,omitempty"`
+	VerifyCaller *bool     `json:"verify_caller,omitempty"`
+}
+
+// Authorization is a representation of authorization
+// v26: https://www.keycloak.org/docs-api/26.0.8/rest-api/index.html#Authorization
+type Authorization struct {
+	Permissions *[]Permission `json:"permissions,omitempty"`
+}
+
+// Permission is a representation of permission
+// v26: https://www.keycloak.org/docs-api/26.0.8/rest-api/index.html#Permission
+type Permission struct {
+	RsID   *string            `json:"rsid,omitempty"`
+	RsName *string            `json:"rsname,omitempty"`
+	Scopes *[]string          `json:"scopes,omitempty"`
+	Claims *map[string]string `json:"claims,omitempty"`
+}
+
+// Confirmation is a representation of confirmation
+// v26: https://www.keycloak.org/docs-api/26.0.8/rest-api/index.html#Confirmation
+type Confirmation struct {
+	X5tS256 *string `json:"x5t#S256,omitempty"`
+	Jkt     *string `json:"jkt,omitempty"`
+}
+
+// IDToken is a representation of ID token
+// v26: https://www.keycloak.org/docs-api/26.0.8/rest-api/index.html#IDToken
+type IDToken struct {
+	Jti                 *string                 `json:"jti,omitempty"`
+	Exp                 *int64                  `json:"exp,omitempty"`
+	Nbf                 *int64                  `json:"nbf,omitempty"`
+	Iat                 *int64                  `json:"iat,omitempty"`
+	Iss                 *string                 `json:"iss,omitempty"`
+	Sub                 *string                 `json:"sub,omitempty"`
+	Typ                 *string                 `json:"typ,omitempty"`
+	Azp                 *string                 `json:"azp,omitempty"`
+	Nonce               *string                 `json:"nonce,omitempty"`
+	AuthTime            *int64                  `json:"auth_time,omitempty"`
+	Sid                 *string                 `json:"sid,omitempty"`
+	AtHash              *string                 `json:"at_hash,omitempty"`
+	CHash               *string                 `json:"c_hash,omitempty"`
+	Name                *string                 `json:"name,omitempty"`
+	GivenName           *string                 `json:"given_name,omitempty"`
+	FamilyName          *string                 `json:"family_name,omitempty"`
+	MiddleName          *string                 `json:"middle_name,omitempty"`
+	Nickname            *string                 `json:"nickname,omitempty"`
+	PreferredUsername   *string                 `json:"preferred_username,omitempty"`
+	Profile             *string                 `json:"profile,omitempty"`
+	Picture             *string                 `json:"picture,omitempty"`
+	Website             *string                 `json:"website,omitempty"`
+	Email               *string                 `json:"email,omitempty"`
+	EmailVerified       *bool                   `json:"email_verified,omitempty"`
+	Gender              *string                 `json:"gender,omitempty"`
+	Birthdate           *string                 `json:"birthdate,omitempty"`
+	Zoneinfo            *string                 `json:"zoneinfo,omitempty"`
+	Locale              *string                 `json:"locale,omitempty"`
+	PhoneNumber         *string                 `json:"phone_number,omitempty"`
+	PhoneNumberVerified *bool                   `json:"phone_number_verified,omitempty"`
+	Address             *AddressClaimSet        `json:"address,omitempty"`
+	ClaimsLocales       *string                 `json:"claims_locales,omitempty"`
+	UpdatedAt           *int64                  `json:"updated_at,omitempty"`
+	Acr                 *string                 `json:"acr,omitempty"`
+	SHash               *string                 `json:"s_hash,omitempty"`
+	OtherClaims         *map[string]interface{} `json:"otherClaims,omitempty"`
+}
+
 // prettyStringStruct returns struct formatted into pretty string
 func prettyStringStruct(t interface{}) string {
 	json, err := json.MarshalIndent(t, "", "\t")
@@ -1539,3 +1674,11 @@ func (v *CredentialRepresentation) String() string                  { return pre
 func (v *RequiredActionProviderRepresentation) String() string      { return prettyStringStruct(v) }
 func (v *BruteForceStatus) String() string                          { return prettyStringStruct(v) }
 func (v *GetClientUserSessionsParams) String() string               { return prettyStringStruct(v) }
+func (v *GetClientExampleParams) String() string                    { return prettyStringStruct(v) }
+func (v *AccessToken) String() string                               { return prettyStringStruct(v) }
+func (v *AddressClaimSet) String() string                           { return prettyStringStruct(v) }
+func (v *Access2) String() string                                   { return prettyStringStruct(v) }
+func (v *Authorization) String() string                             { return prettyStringStruct(v) }
+func (v *Permission) String() string                                { return prettyStringStruct(v) }
+func (v *Confirmation) String() string                              { return prettyStringStruct(v) }
+func (v *IDToken) String() string                                   { return prettyStringStruct(v) }

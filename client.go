@@ -4,10 +4,12 @@ package gocloak
 import (
 	"context"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 	"sync"
 	"time"
@@ -4500,6 +4502,130 @@ func (g *GoCloak) GetUsersManagementPermissions(ctx context.Context, accessToken
 	resp, err := g.GetRequestWithBearerAuth(ctx, accessToken).
 		SetResult(&result).
 		Get(g.getAdminRealmURL(realm, "users-management-permissions"))
+
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+// isFieldInStruct checks if a field exists in the given struct based on its JSON tag
+func isFieldInStruct(field string, s interface{}) bool {
+	t := reflect.TypeOf(s)
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+
+	if t.Kind() != reflect.Struct {
+		return false
+	}
+
+	for i := 0; i < t.NumField(); i++ {
+		tag := t.Field(i).Tag.Get("json")
+		tag = strings.Split(tag, ",")[0]
+		if tag == field {
+			return true
+		}
+	}
+
+	return false
+}
+
+// GetClientExampleAccessToken returns generated example access token of a client for specified user
+func (g *GoCloak) GetClientExampleAccessToken(ctx context.Context, accessToken, realm, idOfClient string, params GetClientExampleParams) (*AccessToken, error) {
+	const errMessage = "could not get example access token"
+	var rawResult *map[string]interface{}
+	var result *AccessToken
+
+	queryParams, err := GetQueryParams(params)
+	if err != nil {
+		return nil, errors.Wrap(err, errMessage)
+	}
+
+	resp, err := g.GetRequestWithBearerAuth(ctx, accessToken).
+		SetResult(&rawResult).
+		SetQueryParams(queryParams).
+		Get(g.getAdminRealmURL(realm, "clients", idOfClient, "evaluate-scopes", "generate-example-access-token"))
+
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return nil, err
+	}
+
+	rawJSON, err := json.Marshal(rawResult)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", errMessage, err)
+	}
+
+	if err := json.Unmarshal(rawJSON, &result); err != nil {
+		return nil, fmt.Errorf("%s: %w", errMessage, err)
+	}
+
+	otherClaims := make(map[string]interface{})
+	for key, value := range *rawResult {
+		if !isFieldInStruct(key, result) {
+			otherClaims[key] = value
+		}
+	}
+	result.OtherClaims = &otherClaims
+
+	return result, nil
+}
+
+// GetClientExampleIDToken returns generated example id token of a client for specified user
+func (g *GoCloak) GetClientExampleIDToken(ctx context.Context, accessToken, realm, idOfClient string, params GetClientExampleParams) (*IDToken, error) {
+	const errMessage = "could not get example id token"
+	var rawResult *map[string]interface{}
+	var result *IDToken
+
+	queryParams, err := GetQueryParams(params)
+	if err != nil {
+		return nil, errors.Wrap(err, errMessage)
+	}
+
+	resp, err := g.GetRequestWithBearerAuth(ctx, accessToken).
+		SetResult(&rawResult).
+		SetQueryParams(queryParams).
+		Get(g.getAdminRealmURL(realm, "clients", idOfClient, "evaluate-scopes", "generate-example-id-token"))
+
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return nil, err
+	}
+
+	rawJSON, err := json.Marshal(rawResult)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", errMessage, err)
+	}
+
+	if err := json.Unmarshal(rawJSON, &result); err != nil {
+		return nil, fmt.Errorf("%s: %w", errMessage, err)
+	}
+
+	otherClaims := make(map[string]interface{})
+	for key, value := range *rawResult {
+		if !isFieldInStruct(key, result) {
+			otherClaims[key] = value
+		}
+	}
+	result.OtherClaims = &otherClaims
+
+	return result, nil
+}
+
+// GetClientExampleUserInfo returns generated example user info of a client for specified user
+func (g *GoCloak) GetClientExampleUserInfo(ctx context.Context, accessToken, realm, idOfClient string, params GetClientExampleParams) (interface{}, error) {
+	const errMessage = "could not get example user info token"
+
+	var result interface{}
+	queryParams, err := GetQueryParams(params)
+	if err != nil {
+		return nil, errors.Wrap(err, errMessage)
+	}
+
+	resp, err := g.GetRequestWithBearerAuth(ctx, accessToken).
+		SetResult(&result).
+		SetQueryParams(queryParams).
+		Get(g.getAdminRealmURL(realm, "clients", idOfClient, "evaluate-scopes", "generate-example-userinfo"))
 
 	if err := checkForError(resp, err, errMessage); err != nil {
 		return nil, err
