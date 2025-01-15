@@ -326,14 +326,16 @@ type SendVerificationMailParams struct {
 
 // Group is a Group
 type Group struct {
-	ID          *string              `json:"id,omitempty"`
-	Name        *string              `json:"name,omitempty"`
-	Path        *string              `json:"path,omitempty"`
-	SubGroups   *[]Group             `json:"subGroups,omitempty"`
-	Attributes  *map[string][]string `json:"attributes,omitempty"`
-	Access      *map[string]bool     `json:"access,omitempty"`
-	ClientRoles *map[string][]string `json:"clientRoles,omitempty"`
-	RealmRoles  *[]string            `json:"realmRoles,omitempty"`
+	ID            *string              `json:"id,omitempty"`
+	Name          *string              `json:"name,omitempty"`
+	Path          *string              `json:"path,omitempty"`
+	ParentID      *string              `json:"parentId,omitempty"`
+	SubGroupCount *int                 `json:"subGroupCount,omitempty"`
+	SubGroups     *[]Group             `json:"subGroups,omitempty"`
+	Attributes    *map[string][]string `json:"attributes,omitempty"`
+	RealmRoles    *[]string            `json:"realmRoles,omitempty"`
+	ClientRoles   *map[string][]string `json:"clientRoles,omitempty"`
+	Access        *map[string]bool     `json:"access,omitempty"`
 }
 
 // GroupsCount represents the groups count response from keycloak
@@ -359,6 +361,13 @@ type GetChildGroupsParams struct {
 	First               *int    `json:"first,string,omitempty"`
 	Max                 *int    `json:"max,string,omitempty"`
 	Search              *string `json:"search,omitempty"`
+}
+
+// GetGroupsParams represents the optional parameters for getting group members
+type GetGroupMembersParams struct {
+	BriefRepresentation *bool `json:"briefRepresentation,string,omitempty"`
+	First               *int  `json:"first,string,omitempty"`
+	Max                 *int  `json:"max,string,omitempty"`
 }
 
 // MarshalJSON is a custom json marshaling function to automatically set the Full and BriefRepresentation properties

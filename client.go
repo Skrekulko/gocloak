@@ -1915,7 +1915,7 @@ func (g *GoCloak) GetGroupsCount(ctx context.Context, token, realm string, param
 }
 
 // GetGroupMembers get a list of users of group with id in realm
-func (g *GoCloak) GetGroupMembers(ctx context.Context, token, realm, groupID string, params GetGroupsParams) ([]*User, error) {
+func (g *GoCloak) GetGroupMembers(ctx context.Context, token, realm, groupID string, params GetGroupMembersParams) ([]*User, error) {
 	const errMessage = "could not get group members"
 
 	var result []*User

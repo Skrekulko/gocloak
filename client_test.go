@@ -2491,7 +2491,7 @@ func Test_GetGroupMembers(t *testing.T) {
 		token.AccessToken,
 		cfg.GoCloak.Realm,
 		groupID,
-		gocloak.GetGroupsParams{},
+		gocloak.GetGroupMembersParams{},
 	)
 	require.NoError(t, err, "AddUserToGroup failed")
 	require.Len(t, users, 1)

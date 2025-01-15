@@ -234,7 +234,7 @@ type GoCloakIface interface {
 	// GetGroupsCount gets the groups count in the realm
 	GetGroupsCount(ctx context.Context, token, realm string, params GetGroupsParams) (int, error)
 	// GetGroupMembers get a list of users of group with id in realm
-	GetGroupMembers(ctx context.Context, token, realm, groupID string, params GetGroupsParams) ([]*User, error)
+	GetGroupMembers(ctx context.Context, token, realm, groupID string, params GetGroupMembersParams) ([]*User, error)
 	// GetClientRoles get all roles for the given client in realm
 	GetClientRoles(ctx context.Context, token, realm, idOfClient string, params GetRoleParams) ([]*Role, error)
 	// GetClientRoleByID gets role for the given client in realm using role ID
