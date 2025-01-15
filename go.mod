@@ -1,4 +1,4 @@
-module github.com/Nerzal/gocloak/v13
+module github.com/Skrekulko/gocloak
 
 go 1.23
 
