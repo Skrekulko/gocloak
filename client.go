@@ -4613,10 +4613,10 @@ func (g *GoCloak) GetClientExampleIDToken(ctx context.Context, accessToken, real
 }
 
 // GetClientExampleUserInfo returns generated example user info of a client for specified user
-func (g *GoCloak) GetClientExampleUserInfo(ctx context.Context, accessToken, realm, idOfClient string, params GetClientExampleParams) (interface{}, error) {
+func (g *GoCloak) GetClientExampleUserInfo(ctx context.Context, accessToken, realm, idOfClient string, params GetClientExampleParams) (*map[string]interface{}, error) {
 	const errMessage = "could not get example user info token"
 
-	var result interface{}
+	var result *map[string]interface{}
 	queryParams, err := GetQueryParams(params)
 	if err != nil {
 		return nil, errors.Wrap(err, errMessage)
@@ -4631,5 +4631,5 @@ func (g *GoCloak) GetClientExampleUserInfo(ctx context.Context, accessToken, rea
 		return nil, err
 	}
 
-	return &result, nil
+	return result, nil
 }
