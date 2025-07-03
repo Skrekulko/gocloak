@@ -1416,6 +1416,14 @@ type AdminEventRepresentation struct {
 	Details        map[string]string          `json:"details,omitempty"`
 }
 
+// AuthDetailsRepresentation represents authentication details for an admin event
+type AuthDetailsRepresentation struct {
+	RealmID   *string `json:"realmId,omitempty"`
+	ClientID  *string `json:"clientId,omitempty"`
+	UserID    *string `json:"userId,omitempty"`
+	IPAddress *string `json:"ipAddress,omitempty"`
+}
+
 // CredentialRepresentation is a representations of the credentials
 // v7: https://www.keycloak.org/docs-api/7.0/rest-api/index.html#_credentialrepresentation
 // v8: https://www.keycloak.org/docs-api/8.0/rest-api/index.html#_credentialrepresentation

@@ -4252,7 +4252,7 @@ func (g *GoCloak) GetAdminEvents(ctx context.Context, token string, realm string
 		return nil, errors.Wrap(err, errMessage)
 	}
 
-	var result []*EventRepresentation
+	var result []*AdminEventRepresentation
 	resp, err := g.GetRequestWithBearerAuth(ctx, token).
 		SetResult(&result).
 		SetQueryParams(queryParams).
