@@ -1413,7 +1413,7 @@ type AdminEventRepresentation struct {
 	ResourcePath   *string                    `json:"resourcePath,omitempty"`
 	Representation *string                    `json:"representation,omitempty"`
 	Error          *string                    `json:"error,omitempty"`
-	Details        *map[string]interface{}    `json:"details,omitempty"`
+	Details        *StringOrArray             `json:"details,omitempty"`
 }
 
 // AuthDetailsRepresentation represents authentication details for an admin event
