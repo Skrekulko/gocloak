@@ -540,6 +540,8 @@ type GoCloakIface interface {
 	MoveCredentialToFirst(ctx context.Context, token, realm, userID, credentialID string) error
 	// GetEvents returns events
 	GetEvents(ctx context.Context, token string, realm string, params GetEventsParams) ([]*EventRepresentation, error)
+	// GetAdminEvents returns admin events
+	GetAdminEvents(ctx context.Context, token string, realm string, params GetAdminEventsParams) ([]*AdminEventRepresentation, error)
 	// GetClientScopesScopeMappingsRealmRolesAvailable returns realm-level roles that are available to attach to this client scope
 	GetClientScopesScopeMappingsRealmRolesAvailable(ctx context.Context, token, realm, clientScopeID string) ([]*Role, error)
 	// GetClientScopesScopeMappingsRealmRoles returns roles associated with a client-scope
